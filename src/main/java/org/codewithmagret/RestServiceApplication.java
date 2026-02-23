@@ -1,7 +1,12 @@
 package org.codewithmagret;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RestServiceApplication {
     public static void main(String[] args) {
-        System.out.println("Hello and welcome to learnsphere!");
+        SpringApplication.run(RestServiceApplication.class, args);
     }
 }
+
