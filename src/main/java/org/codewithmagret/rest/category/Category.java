@@ -17,8 +17,7 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Course> courses;
 
-    public Category(String name) {
-        this.name = name;
+    public Category() {
     }
 
     public Long getId() {
