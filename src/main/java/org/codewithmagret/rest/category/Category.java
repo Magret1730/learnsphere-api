@@ -1,5 +1,6 @@
 package org.codewithmagret.rest.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.codewithmagret.rest.course.Course;
 
@@ -14,6 +15,7 @@ public class Category {
     private String name;
 
     // One category can have many courses. The Course entity owns this relationship.
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Course> courses;
 
