@@ -347,6 +347,14 @@ run `RestServiceApplication.java` from IntelliJ.
 
 ---
 
+## 📚 API Documentation
+
+Full Javadoc documentation can be found here:
+
+[View Javadoc Documentation](./docs/index.html)
+
+---
+
 # Design Decisions
 
 - Used CrudRepository for simplicity
