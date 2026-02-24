@@ -20,6 +20,12 @@ public class StudentService {
     private CourseRepository courseRepository;
 
     /**
+     * Default constructor for StudentService.
+     */
+    public StudentService() {
+    }
+
+    /**
      * Retrieves all students from the repository.
      *
      * @return a list of all students

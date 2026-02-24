@@ -26,6 +26,12 @@ public class CourseService {
     private InstructorRepository instructorRepository;
 
     /**
+     * Default constructor for CourseService.
+     */
+    public CourseService() {
+    }
+
+    /**
      * Retrieves all courses from the repository.
      *
      * @return a list of all courses

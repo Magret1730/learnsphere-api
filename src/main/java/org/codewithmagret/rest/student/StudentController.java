@@ -16,6 +16,12 @@ public class StudentController {
     private StudentService studentService;
 
     /**
+     * Default constructor for StudentController.
+     */
+    public StudentController() {
+    }
+
+    /**
      * Retrieves a list of all students.
      *
      * @return A list of Student objects.

@@ -16,6 +16,12 @@ public class InstructorController {
     private InstructorService instructorService;
 
     /**
+     * Default constructor for InstructorController.
+     */
+    public InstructorController() {
+    }
+
+    /**
      * Retrieves a list of all instructors.
      *
      * @return A list of Instructor objects.

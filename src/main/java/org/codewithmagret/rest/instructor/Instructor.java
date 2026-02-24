@@ -6,6 +6,10 @@ import org.codewithmagret.rest.course.Course;
 
 import java.util.List;
 
+/**
+ * Entity class representing an Instructor in the system.
+ * An instructor can teach multiple courses, but each course is taught by one instructor.
+ */
 @Entity
 public class Instructor {
     @Id

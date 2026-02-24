@@ -10,6 +10,12 @@ public class CourseCreateRequest {
     private Long instructorId;
 
     /**
+     * Default constructor for CourseCreateRequest.
+     */
+    public CourseCreateRequest() {
+    }
+
+    /**
      * Gets the title of the course to be created.
      *
      * @return the title of the course

@@ -16,6 +16,12 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
+     * Default constructor for CategoryController.
+     */
+    public CategoryController() {
+    }
+
+    /**
      * Retrieves a list of all categories.
      *
      * @return A list of Category objects.

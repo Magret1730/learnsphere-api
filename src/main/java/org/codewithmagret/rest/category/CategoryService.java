@@ -14,6 +14,12 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     /**
+     * Default constructor for CategoryService.
+     */
+    public CategoryService() {
+    }
+
+    /**
      * Retrieves all categories from the repository.
      *
      * @return a list of all categories

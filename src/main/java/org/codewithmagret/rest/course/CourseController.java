@@ -16,6 +16,12 @@ public class CourseController {
     private CourseService courseService;
 
     /**
+     * Default constructor for CourseController.
+     */
+    public CourseController() {
+    }
+
+    /**
      * Retrieves a list of all courses.
      *
      * @return A list of Course objects.

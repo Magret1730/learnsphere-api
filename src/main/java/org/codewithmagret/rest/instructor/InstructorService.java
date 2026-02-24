@@ -15,6 +15,12 @@ public class InstructorService {
     private InstructorRepository instructorRepository;
 
     /**
+     * Default constructor for InstructorService.
+     */
+    public InstructorService() {
+    }
+
+    /**
      * Retrieves all instructors from the repository.
      *
      * @return a list of all instructors

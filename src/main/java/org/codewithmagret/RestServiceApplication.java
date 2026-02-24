@@ -9,6 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class RestServiceApplication {
+
+    /**
+     * Default constructor for the RestServiceApplication class.
+     * This constructor is required by Spring Boot to create an instance of the application.
+     */
+    public RestServiceApplication() {
+    }
+
     /**
      * The entry point of the application, which starts the Spring Boot context.
      *
