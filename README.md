@@ -351,7 +351,7 @@ run `RestServiceApplication.java` from IntelliJ.
 
 Full Javadoc documentation can be found here:
 
-[View Javadoc Documentation](./docs/index.html)
+[View Javadoc Documentation](https://magret1730.github.io/learnsphere-api/)
 
 ---
 
