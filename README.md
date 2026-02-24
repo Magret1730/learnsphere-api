@@ -327,7 +327,7 @@ git clone https://github.com/YOUR_USERNAME/learnsphere-api.git
 mvn clean install
 ```
 
-### 3.⃣ Run
+### 3. Run
 
 ```
 run `RestServiceApplication.java` from IntelliJ.

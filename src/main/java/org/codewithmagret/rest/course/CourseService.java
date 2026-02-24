@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for handling business logic related to Course entities.
+ */
 @Service
 public class CourseService {
     @Autowired
@@ -22,10 +25,11 @@ public class CourseService {
     @Autowired
     private InstructorRepository instructorRepository;
 
-    public List<Category> getCategories() {
-        return (List<Category>) categoryRepository.findAll();
-    }
-
+    /**
+     * Retrieves all courses from the repository.
+     *
+     * @return a list of all courses
+     */
     public List<Course> getCourses() {
         List<Course> courses = new ArrayList<>();
         courseRepository.findAll().forEach(courses::add);
@@ -33,10 +37,22 @@ public class CourseService {
         return  courses;
     }
 
+    /**
+     * Retrieves a course by its ID.
+     *
+     * @param id the ID of the course to retrieve
+     * @return the Course object if found, or null if not found
+     */
     public Course getCourseById(Long id) {
         return courseRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Adds a new course to the repository.
+     *
+     * @param req the CourseCreateRequest object containing the data for the new course
+     * @return the saved Course object, or null if the category or instructor was not found
+     */
     public Course addCourse(CourseCreateRequest req) {
         Category category = categoryRepository.findById(req.getCategoryId()).orElse(null);
         Instructor instructor = instructorRepository.findById(req.getInstructorId()).orElse(null);
@@ -57,6 +73,13 @@ public class CourseService {
         return courseRepository.save(c);
     }
 
+    /**
+     * Updates an existing course in the repository.
+     *
+     * @param id  the ID of the course to update
+     * @param req the CourseCreateRequest object containing the updated data for the course
+     * @return the updated Course object if found and updated, or null if the course, category, or instructor was not found
+     */
     public Course updateCourse(Long id, CourseCreateRequest req) {
         Course existing = getCourseById(id);
         if (existing == null) return null;
@@ -76,6 +99,12 @@ public class CourseService {
         return courseRepository.save(existing);
     }
 
+    /**
+     * Deletes a course by its ID.
+     *
+     * @param id the ID of the course to delete
+     * @return true if the course was deleted, false if the course was not found
+     */
     public boolean deleteCourse(Long id) {
         if (!courseRepository.existsById(id)) return false;
         courseRepository.deleteById(id);
