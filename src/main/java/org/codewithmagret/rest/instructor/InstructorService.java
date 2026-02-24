@@ -20,7 +20,11 @@ public class InstructorService {
     }
 
     public Instructor getInstructorById(Long id) {
-        return instructorRepository.findById(id).orElse(null);
+        Instructor instructor = instructorRepository.findById(id).orElse(null);
+
+        System.out.println("instructor = " + instructor);
+
+        return instructor;
     }
 
     public Instructor addInstructor(Instructor instructor) {

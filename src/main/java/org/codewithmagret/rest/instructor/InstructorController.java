@@ -20,8 +20,9 @@ public class InstructorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Instructor> getInstructorById(Long id) {
+    public ResponseEntity<Instructor> getInstructorById(@PathVariable Long id) {
         Instructor instructor = instructorService.getInstructorById(id);
+        System.out.println("instructor = " + instructor);
         if (instructor == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(instructor);
     }
