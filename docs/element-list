@@ -1,0 +1,5 @@
+org.codewithmagret
+org.codewithmagret.rest.category
+org.codewithmagret.rest.course
+org.codewithmagret.rest.instructor
+org.codewithmagret.rest.student

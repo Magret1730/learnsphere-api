@@ -327,7 +327,7 @@ git clone https://github.com/YOUR_USERNAME/learnsphere-api.git
 mvn clean install
 ```
 
-### 3.⃣ Run
+### 3. Run
 
 ```
 run `RestServiceApplication.java` from IntelliJ.
@@ -344,6 +344,14 @@ run `RestServiceApplication.java` from IntelliJ.
 - Fully testable via Postman
 - Swagger documentation
 - Clean layered architecture
+
+---
+
+## 📚 API Documentation
+
+Full Javadoc documentation can be found here:
+
+[View Javadoc Documentation](./docs/index.html)
 
 ---
 
