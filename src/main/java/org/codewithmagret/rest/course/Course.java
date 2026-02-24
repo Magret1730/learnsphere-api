@@ -1,5 +1,6 @@
 package org.codewithmagret.rest.course;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.codewithmagret.rest.category.Category;
 import org.codewithmagret.rest.instructor.Instructor;
@@ -18,23 +19,26 @@ public class Course {
 
     // Many courses can belong to ONE category. Foreign key: `category_id`
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     // Many courses can be taught by one instructor. Foreign key: `instructor_id`
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", nullable = false)
     private Instructor instructor;
 
     // One student can take many courses, One course can have many students. The Student entity owns this relationship.
+    @JsonIgnore // To prevent infinite recursion during JSON serialization // “When converting this object to JSON, skip this field.”
     @ManyToMany(mappedBy = "courses")
     private List<Student> students;
 
     public Course() {}
 
-    public  Course(String title, String code) {
+    public  Course(String title, String code, Category category, Instructor instructor) {
         this.title = title;
         this.code = code;
+        this.category = category;
+        this.instructor = instructor;
     }
 
     public Long getId() {

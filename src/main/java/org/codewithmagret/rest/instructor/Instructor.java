@@ -1,5 +1,6 @@
 package org.codewithmagret.rest.instructor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.codewithmagret.rest.course.Course;
 
@@ -16,6 +17,7 @@ public class Instructor {
     private String email;
 
     // One instructor can teach many courses. The Course entity owns this relationship.
+    @JsonIgnore
     @OneToMany(mappedBy = "instructor")
     private List<Course> courses;
 
