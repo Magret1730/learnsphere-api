@@ -4,6 +4,7 @@ import org.codewithmagret.rest.course.CourseService;
 import org.codewithmagret.rest.report.dto.CoursesByCategory;
 import org.codewithmagret.rest.report.dto.CoursesByStudent;
 import org.codewithmagret.rest.report.dto.InstructorByCourse;
+import org.codewithmagret.rest.report.dto.InstructorsByStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +52,15 @@ public class ReportController {
     @GetMapping("/instructorsByCourses")
     public List<InstructorByCourse> getInstructorsByCourses() {
         return reportService.getInstructorPerCourse();
+    }
+
+    /**
+     * Endpoint to retrieve instructors by students.
+     *
+     * @return a list of instructors grouped by students
+     */
+    @GetMapping("/instructorsByStudents")
+    public List<InstructorsByStudent> instructorsByStudent() {
+        return reportService.instructorsByStudent();
     }
 }

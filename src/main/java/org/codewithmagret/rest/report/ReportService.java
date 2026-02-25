@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for handling business logic related to reports.
@@ -31,6 +33,7 @@ public class ReportService {
 
     /**
      * Retrieves a list of courses grouped by their categories.
+     * Question 1: What courses are offered in each category?
      *
      * @return a list of courses grouped by category
      */
@@ -56,6 +59,7 @@ public class ReportService {
 
     /**
      * Retrieves a list of courses grouped by students.
+     * Question 2: What courses has each student enrolled in?
      *
      * @return a list of courses grouped by student
      */
@@ -81,6 +85,7 @@ public class ReportService {
 
     /**
      * Retrieves courses along with their assigned instructors.
+     * Question 3: What instructor teaches each course?
      *
      * @return a list of courses with their instructors
      */
@@ -97,6 +102,43 @@ public class ReportService {
             }
 
             result.add(new InstructorByCourse(course.getId(), course.getTitle(), course.getCode(), instructorDto));
+        }
+
+        return result;
+    }
+
+    /**
+     * Retrieves a list of instructors associated with each student.
+     * Question 4: What instructors has each student learned from?
+     *
+     * @return a list of students with their associated instructors
+     */
+    public List<InstructorsByStudent> instructorsByStudent() {
+        List<InstructorsByStudent> result = new ArrayList<>();
+
+        Iterable<Student> students = studentRepository.findAll();
+        for (Student s : students) {
+            Map<Long, SimpleInstructor> unique = new LinkedHashMap<>();
+
+            List<Course> courses = s.getCourses();
+            if (courses != null) {
+                for (Course c : courses) {
+                    Instructor i = c.getInstructor();
+                    if (i != null && i.getId() != null) {
+                        unique.putIfAbsent(
+                                i.getId(),
+                                new SimpleInstructor(i.getId(), i.getFirstName(), i.getLastName(), i.getEmail())
+                        );
+                    }
+                }
+            }
+
+            result.add(new InstructorsByStudent(
+                    s.getId(),
+                    s.getFirstName(),
+                    s.getLastName(),
+                    new ArrayList<>(unique.values())
+            ));
         }
 
         return result;
