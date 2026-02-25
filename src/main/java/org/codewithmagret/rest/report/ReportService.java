@@ -6,6 +6,7 @@ import org.codewithmagret.rest.category.CategoryService;
 import org.codewithmagret.rest.course.Course;
 import org.codewithmagret.rest.course.CourseRepository;
 import org.codewithmagret.rest.report.dto.CoursesByCategory;
+import org.codewithmagret.rest.report.dto.CoursesByStudent;
 import org.codewithmagret.rest.report.dto.SimpleCourse;
 import org.codewithmagret.rest.student.Student;
 import org.codewithmagret.rest.student.StudentRepository;
@@ -54,4 +55,24 @@ public class ReportService {
         return result;
     }
 
-}
+    //which courses have each student enrolled into
+    public List<CoursesByStudent> getCoursesPerStudent() {
+        List<CoursesByStudent> result = new ArrayList<>();
+
+        Iterable<Student> students = studentRepository.findAll();
+        for  (Student student : students) {
+            List<SimpleCourse> courseDtos = new ArrayList<>();
+            List<Course> courses = student.getCourses();
+
+        if (courses != null) {
+            for (Course c : courses) {
+                courseDtos.add(new SimpleCourse(c.getId(), c.getTitle(), c.getCode()));
+            }
+        }
+
+            result.add(new CoursesByStudent(student.getId(), student.getFirstName(), student.getLastName(), courseDtos));
+         }
+
+            return result;
+        }
+    }
