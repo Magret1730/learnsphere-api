@@ -1,6 +1,6 @@
 package org.codewithmagret.rest.report.dto;
 
-/*
+/**
  * DTO for representing a simple instructor in reports.
  */
 public class SimpleInstructor {
