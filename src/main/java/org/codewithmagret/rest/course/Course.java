@@ -17,6 +17,9 @@ import java.util.List;
  * allowing students to browse and enroll in courses based on their interests and needs.
  */
 @Entity
+@Table(name = "course", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"code"})
+})
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

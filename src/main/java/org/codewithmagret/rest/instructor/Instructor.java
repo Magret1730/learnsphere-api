@@ -11,6 +11,9 @@ import java.util.List;
  * An instructor can teach multiple courses, but each course is taught by one instructor.
  */
 @Entity
+@Table(name = "instructor", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

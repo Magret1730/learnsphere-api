@@ -347,7 +347,7 @@ run `RestServiceApplication.java` from IntelliJ.
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 Full Javadoc documentation can be found here:
 

@@ -63,11 +63,21 @@ public class CourseService {
         Category category = categoryRepository.findById(req.getCategoryId()).orElse(null);
         Instructor instructor = instructorRepository.findById(req.getInstructorId()).orElse(null);
 
-        System.out.println("Category found: " + category);
-        System.out.println("Instructor found: " + instructor);
-
         if (category == null || instructor == null) {
-            return null;
+            throw new IllegalArgumentException("Category or instructor not found.");
+        }
+
+//        if (req.getCode() == null || req.getCode().trim().isEmpty()) return null;
+
+        String code = req.getCode().trim();
+
+        if (courseRepository.existsByCode(code)) {
+            throw new IllegalArgumentException("Course code already exists.");
+        }
+
+        Course existing = courseRepository.findByCode(code);
+        if (existing != null) {
+            throw new IllegalArgumentException("Course code already exists.");
         }
 
         Course c = new Course();
@@ -88,13 +98,15 @@ public class CourseService {
      */
     public Course updateCourse(Long id, CourseCreateRequest req) {
         Course existing = getCourseById(id);
-        if (existing == null) return null;
+        if (existing == null) {;
+            throw new IllegalArgumentException("Course not found.");
+        }
 
         Category category = categoryRepository.findById(req.getCategoryId()).orElse(null);
         Instructor instructor = instructorRepository.findById(req.getInstructorId()).orElse(null);
 
         if (category == null || instructor == null) {
-            return null; // controller will return 400
+            throw new IllegalArgumentException("Category or instructor not found.");
         }
 
         existing.setTitle(req.getTitle() == null ? null : req.getTitle().trim());
