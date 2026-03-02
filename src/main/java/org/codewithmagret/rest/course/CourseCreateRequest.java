@@ -1,12 +1,34 @@
 package org.codewithmagret.rest.course;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /**
  * Data Transfer Object for creating a new Course.
  */
 public class CourseCreateRequest {
+    /**
+     * The title of the course to be created.
+     */
+    @NotBlank
     private String title;
+
+    /**
+     * The unique code of the course to be created.
+     */
+    @NotBlank
     private String code;
+
+    /**
+     * The ID of the category to which the course belongs.
+     */
+    @NotNull
     private Long categoryId;
+
+    /**
+     * The ID of the instructor teaching the course.
+     */
+    @NotNull
     private Long instructorId;
 
     /**

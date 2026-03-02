@@ -56,6 +56,12 @@ public class StudentService {
         student.setId(null);
         if (student.getFirstName() != null) student.setFirstName(student.getFirstName().trim());
         if (student.getLastName() != null) student.setLastName(student.getLastName().trim());
+
+        if (studentRepository.existsByFirstNameIgnoreCaseAndLastNameIgnoreCase(
+                student.getFirstName(), student.getLastName())) {
+            throw new IllegalArgumentException("Student with this first and last name already exists.");
+        }
+
         return studentRepository.save(student);
     }
 
@@ -68,7 +74,11 @@ public class StudentService {
      */
     public Student updateStudent(Long id, Student studentToUpdate) {
         Student existing = getStudentById(id);
-        if (existing == null) return null;
+
+        // If the student with the given ID does not exist, return null
+        if (existing == null) {
+            throw new IllegalArgumentException("Student not found.");
+        };
 
         existing.setFirstName(studentToUpdate.getFirstName() == null ? null : studentToUpdate.getFirstName().trim());
         existing.setLastName(studentToUpdate.getLastName() == null ? null : studentToUpdate.getLastName().trim());
@@ -83,6 +93,7 @@ public class StudentService {
      * @return true if the student was deleted, false if the student was not found
      */
     public boolean deleteStudent(Long id) {
+        // Check if the student exists before attempting to delete
         if (!studentRepository.existsById(id)) {
             return false;
         }
@@ -103,7 +114,15 @@ public class StudentService {
         Student student = studentRepository.findById(studentId).orElse(null);
         Course course = courseRepository.findById(courseId).orElse(null);
 
-        if (student == null || course == null) return null;
+        // If either the student or course is not found, return null
+        if (student == null || course == null) {
+            throw new IllegalArgumentException("Student or course not found.");
+        };
+
+        // Check if the student is already enrolled in the course
+        boolean already = student.getCourses().stream()
+                .anyMatch(c -> c.getId().equals(courseId));
+        if (already) return student;
 
         student.getCourses().add(course);
         return studentRepository.save(student);
@@ -122,7 +141,9 @@ public class StudentService {
         Student student = studentRepository.findById(studentId).orElse(null);
         Course course = courseRepository.findById(courseId).orElse(null);
 
-        if (student == null || course == null) return null;
+        if (student == null || course == null) {;
+            throw new IllegalArgumentException("Student or course not found.");
+        };
 
         student.getCourses().remove(course);
         return studentRepository.save(student);

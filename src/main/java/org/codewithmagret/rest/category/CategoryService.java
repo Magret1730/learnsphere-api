@@ -45,6 +45,10 @@ public class CategoryService {
      * @return the saved Category object
      */
     public Category addCategory(Category category) {
+        if (categoryRepository.existsByName(category.getName())) {
+            throw new IllegalArgumentException("Category name already exists.");
+        }
+
         category.setId(null);
         category.setName(category.getName() == null ? null : category.getName().trim());
 
@@ -62,7 +66,7 @@ public class CategoryService {
         Category categoryFound = categoryRepository.findById(id).orElse(null);
 
         if (categoryFound == null) {
-            return null;
+            throw new IllegalArgumentException("Category not found");
         }
 
         categoryFound.setName(categoryToUpdate.getName() == null ? null : categoryToUpdate.getName().trim());

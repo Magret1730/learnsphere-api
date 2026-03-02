@@ -57,6 +57,11 @@ public class InstructorService {
         if (instructor.getFirstName() != null) instructor.setFirstName(instructor.getFirstName().trim());
         if (instructor.getLastName() != null) instructor.setLastName(instructor.getLastName().trim());
         if (instructor.getEmail() != null) instructor.setEmail(instructor.getEmail().trim());
+
+        if (instructorRepository.existsByEmail(instructor.getEmail())) {
+            throw new IllegalArgumentException("Instructor's email already exists.");
+        }
+
         return instructorRepository.save(instructor);
     }
 
@@ -69,7 +74,9 @@ public class InstructorService {
      */
     public Instructor updateInstructor(Long id, Instructor instructorToUpdate) {
         Instructor existing = getInstructorById(id);
-        if (existing == null) return null;
+        if (existing == null) {;
+            throw new IllegalArgumentException("Instructor not found.");
+        }
 
         existing.setFirstName(instructorToUpdate.getFirstName() == null ? null : instructorToUpdate.getFirstName().trim());
         existing.setLastName(instructorToUpdate.getLastName() == null ? null : instructorToUpdate.getLastName().trim());
